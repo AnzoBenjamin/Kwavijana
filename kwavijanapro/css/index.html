@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>User Profile</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+      <!DOCTYPE html>
+<html>
+  <head>
+    <title>User Profile</title>
+    <style>
+     /* Profile card styles */
+.profile-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+.profile-card img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.profile-card h2 {
+  margin-bottom: 5px;
+  font-size: 20px;
+}
+
+.profile-card p {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.profile-card button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Post card styles */
+.post-card {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  margin-top: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.post-card header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.post-card header img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.post-card header h3 {
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+.post-card header span {
+  font-size: 14px;
+  color: #777;
+}
+
+.post-card p {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.post-card .comment-section {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.post-card .comment-section h4 {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.post-card .comment-section .comment {
+  display: flex;
+  margin-bottom: 5px;
+}
+
+.post-card .comment-section .comment img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.post-card .comment-section .comment p {
+  font-size: 14px;
+  margin-right: 10px;
+}
+
+.post-card .comment-section .comment span {
+  font-size: 12px;
+  color: #777;
+}
+
+.post-card .like-section {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.post-card .like-section button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+.post-card .like-section .like-count {
+  font-size: 16px;
+}
+
+/* Post form styles */
+.post-form {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  margin-top: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding:
+}
+/* Posting section */
+.posting-section {
+  background-color: #ffffff;
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+}
+
+.posting-section textarea {
+  width: 100%;
+  min-height: 100px;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #cccccc;
+  font-size: 16px;
+}
+
+.posting-section button {
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.posting-section button:hover {
+  background-color: #0069d9;
+}
+
+.post {
+  background-color: #ffffff;
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+}
+
+.post .post-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.post .post-header img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.post .post-header .post-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.post .post-header .post-info .post-author {
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.post .post-header .post-info .post-date {
+  color: #777777;
+  font-size: 14px;
+}
+
+.post .post-content {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.post .post-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
+.post .post-actions button {
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.post .post-actions button:hover {
+  background-color: #0069d9;
+}
+
+/* User details */
+.user-details {
+  background-color: #ffffff;
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+}
+
+.user-details h3 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.user-details p {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.user-details ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.user-details li {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.user-details li i {
+  color: #007bff;
+  margin-right: 10px;
+}
+
+/* Online status indicator */
+.status-indicator {
+  position: absolute;
+  bottom: 10px;
+}
+/* Edit Button */
+.edit-button {
+  font-size: 14px;
+  padding: 6px 12px;
+  border-radius: 5px;
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+}
+
+/* Online/Offline Indicator */
+.status-indicator {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 4px;
+  border-radius: 50%;
+}
+.status-indicator.online {
+  background-color: #2ecc71;
+}
+.status-indicator.offline {
+  background-color: #ccc;
+}
+
+/* Posting Section */
+.post-section {
+  margin-top: 30px;
+}
+.post-input {
+  width: 100%;
+  height: 60px;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  resize: none;
+}
+.post-button {
+  margin-top: 10px;
+  font-size: 16px;
+  padding: 8px 16px;
+  border-radius: 5px;
+  background-color: #3498db;
+  color: white;
+  cursor: pointer;
+}
+.post-list {
+  margin-top: 20px;
+}
+.post-item {
+  background-color: #f5f5f5;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+.post-item .post-text {
+  margin-bottom: 5px;
+}
+.post-item .post-meta {
+  font-size: 12px;
+  color: #777;
+}
+
+
+    </style>
+  </head>
+  <body>
+   <div id="app">
+  <div class="profile">
+    <div class="photo-card">
+      <div class="photo">
+        <img :src="profilePic" alt="Profile picture">
+      </div>
+      <h1>{{ username }}</h1>
+      <div class="follow-message">
+        <button>Follow</button>
+        <button>Message</button>
+      </div>
+    </div>
+    <div class="user-details">
+      <h2>{{ username }}</h2>
+      <p>{{ occupation }}</p>
+      <p>{{ location }}</p>
+      <p>{{ education }}</p>
+      <p>{{ tech_stack }}</p>
+      <p>{{ about }}</p>
+    </div>
+  </div>
+
+  <div class="post-section">
+    <div class="post-input">
+      <textarea v-model="newPost"></textarea>
+      <button v-on:click="addPost">Post</button>
+    </div>
+    
+    <h3>My Posts</h3>
+    <ul class="posts">
+      <li v-for="(post, index) in posts">
+        <p>{{ post.content }}</p>
+        <div class="post-meta">
+          <p>Posted on {{ post.date }}</p>
+          <p v-if="post.taggedUsers.length > 0">Tagged users: {{ post.taggedUsers.join(', ') }}</p>
+          <button v-on:click="deletePost(index)">Delete</button>
+        </div>
+      </li>
+    </ul>
+    
+    <h3>Tagged in</h3>
+    <ul class="posts">
+      <li v-for="(post, index) in taggedPosts">
+        <p>{{ post.content }}</p>
+        <div class="post-meta">
+          <p>Posted by {{ post.author }} on {{ post.date }}</p>
+          <button v-on:click="untagUser(index)">Remove tag</button>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+  new Vue({
+    el: "#app",
+    data: {
+      username: "John Doe",
+      occupation: "Software Developer",
+      location: "San Francisco, CA",
+      education: "Bachelor's Degree in Computer Science",
+      tech_stack: "Vue.js, React, Node.js",
+      about: "I'm a passionate developer who loves building web applications.",
+      profilePic: "https://via.placeholder.com/150",
+      newPost: "",
+      posts: [
+        { content: "Hello, world!", date: "2022-03-01", taggedUsers: [] },
+        { content: "I'm learning Vue.js!", date: "2022-03-02", taggedUsers: [] },
+        { content: "Check out my new blog post", date: "2022-03-03", taggedUsers: ["Jane Smith", "Bob Johnson"] }
+      ],
+      taggedPosts: [
+        { content: "Thanks for tagging me in this post", author: "Jane Smith", date: "2022-03-04" },
+        { content: "This is a great article, thanks for sharing!", author: "Bob Johnson", date: "2022-03-05" }
+      ]
+    },
+    methods: {
+  addPost: function() {
+    if (this.newPost) {
+      this.posts.unshift({
+        id: Date.now(),
+        content: this.newPost,
+        author: {
+          name: this.currentUser.name,
+          avatar: this.currentUser.avatar
+        },
+        comments: [],
+        likes: [],
+        createdAt: new Date()
+      });
+      this.newPost = '';
+    }
+  },
+  addComment: function(post) {
+    if (post.newComment) {
+      post.comments.push({
+        id: Date.now(),
+        content: post.newComment,
+        author: {
+          name: this.currentUser.name,
+          avatar: this.currentUser.avatar
+        },
+        createdAt: new Date()
+      });
+      post.newComment = '';
+    }
+  },
+  likePost: function(post) {
+    if (!post.likes.includes(this.currentUser.name)) {
+      post.likes.push(this.currentUser.name);
+    } else {
+      post.likes.splice(post.likes.indexOf(this.currentUser.name), 1);
+    }
+  },
+  editProfile: function() {
+    this.editingProfile = true;
+    this.tempUser = Object.assign({}, this.currentUser);
+  },
+  cancelEdit: function() {
+    this.editingProfile = false;
+    this.tempUser = {};
+  },
+  saveProfile: function() {
+    this.currentUser = Object.assign({}, this.tempUser);
+    this.editingProfile = false;
+    this.tempUser = {};
+  }
+}
+
+
+  </body>
+</html>
+
+

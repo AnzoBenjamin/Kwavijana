@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Marketplace</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css"
+    />
+  </head>
+  <body>
+    <div id="app">
+        <div class="product-card">
+            <div class="card-image">
+              <img :src="'/img/' + product.image" :alt="product.name" />
+            </div>
+            </div>
+            <div class="card-content">
+              <h3 class="card-title">{{ product.name }}</h3>
+              <p class="card-text">{{ product.description }}</p>
+              <div class="card-details">
+                <p class="seller-name">{{ product.sellerName }}</p>
+                <p class="seller-contact">{{ product.sellerContact }}</p>
+                <p class="price">{{ product.price }}</p>
+              </div>
+              <div class="card-actions">
+                <a href="#" class="see-more">See More</a>
+                <button @click="addToCart">Add to Cart</button>
+              </div>
+            </div>
+          </div>
+          <div class="product-form">
+            <h3>Add a New Item</h3>
+            <form @submit.prevent="addItem">
+              <label>
+                Name:
+                <input type="text" v-model="newItem.name" />
+              </label>
+              <label>
+                Image URL:
+                <input type="text" v-model="newItem.image" />
+              </label>
+              <label>
+                Description:
+                <textarea v-model="newItem.description"></textarea>
+              </label>
+              <label>
+                Seller Name:
+                <input type="text" v-model="newItem.sellerName" />
+              </label>
+              <label>
+                Seller Contact:
+                <input type="text" v-model="newItem.sellerContact" />
+              </label>
+              <label>
+                Price:
+                <input type="text" v-model="newItem.price" />
+              </label>
+              <button type="submit">Add Item</button>
+            </form>
+          </div>
+
+  
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
+    <script src="./main.js"></script>
+    <script>
+        export default {
+          name: 'Product',
+          props: {
+            product: Object
+          },
+          data() {
+            return {
+              newItem: {
+                name: '',
+                image: '',
+                description: '',
+                sellerName: '',
+                sellerContact: '',
+                price: ''
+              }
+            }
+          },
+          methods: {
+            addToCart() {
+              // TODO: Implement add to cart functionality
+            },
+            addItem() {
+              this.$emit('add-item', this.newItem);
+              this.newItem = {
+                name: '',
+                image: '',
+                description: '',
+                sellerName: '',
+                sellerContact: '',
+                price: ''
+              };
+            }
+          }
+        }
+        </script>
+   <style>
+.product-card {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin: 10px;
+  width: 300px;
+}
+.card-image {
+  height: 200px;
+  overflow: hidden;
+}
+.card-image img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+}
+.card-content {
+  padding: 10px;
+  flex-grow: 1;
+}
+.card-title {
+  font-size: 20px;
+  margin: 0;
+}
+.card-text {
+  font-size: 16px;
+  margin-top: 10px;
+}
+.card-details {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+.seller-name {
+</style>
+        
+  </body>
+</html>

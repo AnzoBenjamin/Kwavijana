@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	
+</head>
+<body>
+<div id="app">
+  <div class="profile-container">
+    <div class="cover-photo"></div>
+    <div class="profile-picture"></div>
+    <div class="user-details">
+    </br>
+        </br>
+            </br>
+      <h1 class="name">{{ user.name }}</h1>
+      <h2 class="location">{{ user.location }}</h2>
+      <p class="bio">{{ user.bio }}</p>
+      <div class="button-group">
+        <button class="follow-button" @click="toggleFollow">{{ isFollowing ? 'Unfollow' : 'Follow' }}</button>
+        <button class="message-button">Message</button>
+      </div>
+    </div>
+ </br>
+ </br>
+ </br>
+    <div class="post-section">
+      <div class="create-post">
+        <div class="profile-picture"></div>
+        <input type="text" placeholder="What's on your mind?" v-model="newPostText">
+        <button class="post-button" @click="addPost">Post</button>
+      </div>
+</div>
+
+<style type="text/css">
+	html, body {
+  margin: 0;
+  padding: 0;
+}
+
+.profile-container {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.cover-photo {
+  height: 200px;
+  background-image: url('https://via.placeholder.com/700x200');
+  background-size: cover;
+}
+
+.profile-picture {
+  width: 150px;
+  height: 150px;
+  background-image: url('https://via.placeholder.com/150x150');
+  background-size: cover;
+  border-radius: 50%;
+  margin-top: -75px;
+  margin-left: 20px;
+  z-index: 1;
+  position: relative;
+  border: 3px solid white;
+}
+
+.user-details {
+  background-color: #F0F2F5;
+  padding: 20px;
+  margin-top: -70px;
+  z-index: 2;
+  position: relative;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.name {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.location {
+  font-size: 18px;
+  color: #65676B;
+  margin-bottom: 10px;
+}
+
+.bio {
+  font-size: 18px;
+  color: #65676B;
+  line-height: 1.5;
+}
+
+.button-group {
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.follow-button, .message-button {
+  padding: 10px;
+  background-color: #1877F2;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.follow-button:hover,
+.follow-button:hover,
+.message-button:hover {
+background-color: #166FE5;
+}
+
+.post-section {
+margin-top: 20px;
+background-color: white;
+padding: 20px;
+border-radius: 10px;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.create-post {
+display: flex;
+align-items: center;
+margin-bottom: 20px;
+}
+
+.create-post input[type="text"] {
+width: 100%;
+padding: 10px;
+margin-left: 10px;
+font-size: 18px;
+border-radius: 5px;
+border: none;
+box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+box-sizing: border-box;
+}
+
+.post-button {
+padding: 10px;
+background-color: #1877F2;
+color: white;
+border: none;
+border-radius: 5px;
+margin-left: 10px;
+cursor: pointer;
+}
+
+.post-button:hover {
+background-color: #166FE5;
+}
+
+.separator {
+border-bottom: 1px solid #E4E6EB;
+margin: 20px 0;
+}
+
+.post {
+display: flex;
+margin-bottom: 20px;
+}
+
+.post .profile-picture {
+width: 50px;
+height: 50px;
+background-image: url('https://via.placeholder.com/50x50');
+background-size: cover;
+border-radius: 50%;
+margin-right: 10px;
+}
+
+.post-content {
+display: flex;
+flex-direction: column;
+}
+
+.post-author {
+font-size: 18px;
+font-weight: bold;
+margin-bottom: 5px;
+}
+
+.post-text {
+font-size: 16px;
+color: #65676B;
+line-height: 1.5;
+}
+
+@media only screen and (max-width: 600px) {
+.profile-container {
+padding: 10px;
+}
+.cover-photo {
+height: 150px;
+}
+.profile-picture {
+width: 100px;
+height: 100px;
+margin-top: -50px;
+margin-left: 10px;
+}
+.user-details {
+margin-top: -45px;
+}
+.name {
+font-size: 24px;
+}
+.location {
+font-size: 16px;
+}
+.bio {
+font-size: 14px;
+}
+.follow-button, .message-button {
+padding: 8px;
+font-size: 14px;
+margin-right: 5px;
+}
+.create-post input[type="text"] {
+font-size: 16px;
+padding: 8px;
+}
+.post-button {
+padding: 8px;
+font-size: 14px;
+margin-left: 5px;
+}
+.post .profile-picture {
+width: 40px;
+height: 40px;
+margin-right: 5px;
+}
+.post-author {
+font-size: 16px;
+}
+.post-text {
+font-size: 14px;
+}
+}
+
+</style>
+<script type="text/javascript">
+	new Vue({
+  el: '#app',
+  data: {
+    user: {
+      name: '',
+      location: '',
+      bio: ''
+    },
+    isFollowing: false,
+    newPostText: '',
+    posts: []
+  },
+  methods: {
+   
+// Method to toggle the follow status of the user
+toggleFollow() {
+this.isFollowing = !this.isFollowing;
+},
+// Method to add a new post
+addPost() {
+  if (this.newPostText) {
+    const newPost = {
+      author: this.user.name,
+      text: this.newPostText
+    };
+    this.posts.unshift(newPost);
+    this.newPostText = '';
+  }
+}
+}
+});
+</script>
+</body>
+</html>

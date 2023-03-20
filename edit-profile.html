@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Vue.js Profile Form</title>
+  <script src="https://unpkg.com/vue@3.2.31/dist/vue.global.js"></script>
+</head>
+<body>
+  <div id="app">
+    <!-- your Vue.js code here -->
+        <form class="edit-profile-form" @submit.prevent="submitForm">
+          <h2>Edit Profile</h2>
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" v-model="name" required>
+          </div>
+          <div class="form-group">
+            <label for="position">Position</label>
+            <input type="text" id="position" v-model="position" required>
+          </div>
+          <div class="form-group">
+            <label for="experience">Experience</label>
+            <textarea id="experience" v-model="experience" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" v-model="email" required>
+          </div>
+          <div class="form-group">
+            <label for="website">Website</label>
+            <input type="url" id="website" v-model="website" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" v-model="phone" required>
+          </div>
+          <div class="form-group">
+            <label for="about-me">About Me</label>
+            <textarea id="about-me" v-model="aboutMe" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="skills">Skills</label>
+            <textarea id="skills" v-model="skills" required></textarea>
+          </div>
+          <button type="submit">Save</button>
+        </form>
+     </div>    
+      <script>
+      export default {
+        data() {
+          return {
+            name: '',
+            position: '',
+            experience: '',
+            email: '',
+            website: '',
+            phone: '',
+            aboutMe: '',
+            skills: '',
+          }
+        },
+        methods: {
+          submitForm() {
+            // Validation logic to check if any field is left empty
+            if (
+              !this.name ||
+              !this.position ||
+              !this.experience ||
+              !this.email ||
+              !this.website ||
+              !this.phone ||
+              !this.aboutMe ||
+              !this.skills
+            ) {
+              // If any field is left empty, show an error message
+              alert('Please fill in all fields')
+            } else {
+              // If all fields are filled, submit the form
+              // and do something with the form data
+              console.log(this.name, this.position, this.experience, this.email, this.website, this.phone, this.aboutMe, this.skills)
+            }
+          },
+        },
+      }
+      </script>
+      
+      <style>
+      .edit-profile-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 2rem auto;
+        padding: 2rem;
+        border: 2px solid #ddd;
+        max-width: 600px;
+      }
+      
+      .edit-profile-form h2 {
+        margin-bottom: 2rem;
+      }
+      
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 1rem;
+        width: 100%;
+      }
+      
+      .form-group label {
+        margin-bottom: 0.5rem;
+        font-weight: bold;
+      }.form-group input,
+      .form-group textarea {
+        padding: 0.5rem;
+        font-size: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
+      
+      .form-group input:focus,
+      .form-group textarea:focus {
+        outline: none;
+        border-color: #66afe9;
+        box-shadow: 0 0 5px #66afe9;
+      }
+      
+      button[type="submit"] {
+        padding: 0.5rem;
+        margin-top: 1rem;
+        font-size: 1rem;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      
+      button[type="submit"]:hover {
+        background-color: #0069d9;
+      }
+
+</style>
+</body>
+</html>

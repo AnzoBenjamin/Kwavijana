@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>User Profile</title>
+    <style>
+      /* CSS code from previous example */
+    </style>
+    <link rel="stylesheet" type="text/css" href="css/mypartstyle.css">
+  </head>
+
+  <body>
+    <div id="app">
+      <div class="container">
+        <div class="profile-card">
+          <div class="profile-picture">
+            <img :src="profilePicture" alt="Profile Picture">
+          </div>
+        </br>
+          <div class="user-name">{{ userName }}</div>
+          <div class="profile-actions">
+            <button class="follow-button" v-if="!isFollowing" @click="follow">Follow</button>
+            <button class="unfollow-button" v-else @click="unfollow">Unfollow</button>
+            <button class="edit-profile-button" @click="editProfile">Edit Profile</button>
+            <button class="message-button" @click="openMessageModal">Message</button>
+            <div class="notification" v-if="hasNotifications">{{ notificationCount }}</div>
+          </div>
+          <div class="edit-button" @click="editProfile">Edit Profile</div>
+          <div class="status-indicator" :class="{ 'online': isOnline, 'offline': !isOnline }"></div>
+        </div>
+        <div class="user-details-card">
+          <div class="user-detail">
+            <div class="detail-title">Occupation</div>
+            <div class="detail-value">{{ occupation }}</div>
+          </div>
+          <div class="user-detail">
+            <div class="detail-title">Location</div>
+            <div class="detail-value">{{ location }}</div>
+          </div>
+          <div class="user-detail">
+            <div class="detail-title">Education</div>
+            <div class="detail-value">{{ education }}</div>
+          </div>
+          <div class="user-detail">
+            <div class="detail-title">Tech Stack</div>
+            <div class="detail-value">{{ techStack }}</div>
+          </div>
+          <div class="user-detail">
+            <div class="detail-title">About</div>
+            <div class="detail-value">{{ about }}</div>
+          </div>
+          <div class="posting-section">
+            <textarea v-model="postContent" placeholder="What's on your mind?"></textarea>
+          </br>
+            <button @click="submitPost">Post</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal" :class="{ 'active': isEditingProfile }">
+        <div class="modal-content">
+          <h2>Edit Profile</h2>
+          <form>
+            <div class="form-field">
+              <label for="profile-picture-input">Profile Picture URL:</label>
+              <input id="profile-picture-input" type="text" v-model="profilePicture">
+            </div>
+            <div class="form-field">
+              <label for="user-name-input">User Name:</label>
+              <input id="user-name-input" type="text" v-model="userName">
+            </div>
+            <div class="form-field">
+              <label for="occupation-input">Occupation:</label>
+              <input id="occupation-input" type="text" v-model="occupation">
+            </div>
+            <div class="form-field">
+              <label for="location-input">Location:</label>
+              <input id="location-input" type="text" v-model="location">
+            </div>
+            <div class="form-field">
+              <label for="education-input">Education:</label>
+              <input id="education-input" type="text" v-model="education">
+            </div>
+            <div class="form-field">
+                <label for="tech-stack-input">Tech Stack:</label>
+                <input id="tech-stack-input" type="text" v-model="techStack">
+              </div>
+              <div class="form-field">
+                <label for="about-input">About:</label>
+                <textarea id="about-input" v-model="about"></textarea>
+              </div>
+              <div class="form-actions">
+                <button type="button" @click="cancelEdit">Cancel</button>
+                <button type="submit" @click.prevent="saveProfile">Save</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+      <script>
+        var app = new Vue({
+          el: '#app',
+          data: {
+            occupation: 'Software Engineer',
+            location: 'San Francisco, CA',
+            education: 'B.S. Computer Science',
+            techStack: 'Vue.js, Node.js, MongoDB',
+            about: 'I love building web applications and exploring new technologies!',
+            isFollowing: false,
+            hasNotifications: true,
+            notificationCount: 3,
+            isOnline: true,
+            isEditingProfile: false,
+            profilePicture: 'https://via.placeholder.com/150',
+            userName: 'John Doe',
+            postContent: '',
+          },
+          methods: {
+            follow() {
+              this.isFollowing = true;
+            },
+            unfollow() {
+              this.isFollowing = false;
+            },
+            editProfile() {
+              this.isEditingProfile = true;
+            },
+            cancelEdit() {
+              this.isEditingProfile = false;
+            },
+            saveProfile() {
+              // Save profile changes to backend
+              this.isEditingProfile = false;
+            },
+            submitPost() {
+              // Submit new post to backend
+              this.postContent = '';
+            },
+          },
+        });
+      </script>
+    </body>
+  </html>
+  

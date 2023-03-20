@@ -1,0 +1,113 @@
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <Post></Post>
+    </div>
+
+    <template id="post-template">
+      <div class="post">
+        <!-- Your post content goes here -->
+        <form @submit.prevent="addComment">
+          <textarea v-model="newComment"></textarea>
+          <button type="submit">Post Comment</button>
+        </form>
+        <div class="comments">
+          <h3>Comments</h3>
+          <Comment v-for="comment in comments" :key="comment.id" :comment="comment"></Comment>
+        </div>
+      </div>
+    </template>
+
+    <template id="comment-template">
+      <div class="comment">
+        <p>{{ comment.text }}</p>
+      </div>
+    </template>
+
+    <script>
+    const Comment = Vue.component('Comment', {
+      props: ['comment'],
+      template: '#comment-template'
+    })
+
+    const Post = Vue.component('Post', {
+      components: {
+        Comment
+      },
+      data() {
+        return {
+          comments: [],
+          newComment: ''
+        }
+      },
+      methods: {
+        addComment() {
+          this.comments.push({
+            text: this.newComment
+          })
+          this.newComment = ''
+        }
+      },
+      template: '#post-template'
+    })
+
+    const app = new Vue({
+      el: '#app',
+      components: {
+        Post
+      },
+      data: {
+        // Your app data
+      },
+      methods: {
+        // Your app methods
+      }
+    })
+    </script>
+          <style>
+            .post {
+              width: 800px;
+              margin: 20px auto;
+              padding: 20px;
+              border: 1px solid #ddd;
+              border-radius: 10px;
+            }
+            textarea {
+              width: 100%;
+              height: 80px;
+              margin-bottom: 10px;
+              padding: 10px;
+              border: 1px solid #ddd;
+              border-radius: 10px;
+            }
+            button {
+              padding: 10px 20px;
+              border-radius: 10px;
+              background-color: #3b5998;
+              color: #fff;
+              border: none;
+              cursor: pointer;
+            }
+            .comments {
+              margin-top: 20px;
+            }
+            .comment {
+              padding: 20px;
+              border: 1px solid #ddd;
+              border-radius: 10px;
+              margin-bottom: 20px;
+            }
+          </style>
+        </head>
+        <body>
+          <div id="app">
+            <Post></Post>
+          </div>
+      
+          <!-- ... The rest of your code ... -->
+       
+  </body>
+</html>

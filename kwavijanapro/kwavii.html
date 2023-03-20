@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue Navigation Bar</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <nav class="navbar">
+        <div class="logo">Logo</div>
+        <div class="nav-items">
+          <div class="nav-item" v-for="item in items" :key="item.text">
+            {{ item.text }}
+          </div>
+        </div>
+        <div class="button">Button</div>
+      </nav>
+    </div>
+  </body>
+  <style>
+    .navbar {
+      background-color: blue;
+      display: flex;
+      justify-content: space-between;
+      padding: 1rem;
+    }
+
+    .nav-items {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-item {
+      padding: 0 10px;
+    }
+
+    .button {
+      background-color: yellow;
+      padding: 10px;
+    }
+  </style>
+  <script>
+    new Vue({
+      el: "#app",
+      data() {
+        return {
+          items: [
+            { text: 'Home' },
+            { text: 'About' },
+            { text: 'Services' },
+            { text: 'Courses' },
+            { text: 'Blog' },
+            { text: 'Become a Partner' },
+            { text: 'Contact' },
+          ],
+        };
+      },
+    });
+  </script>
+</html>

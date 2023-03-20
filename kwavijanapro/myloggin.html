@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <meta charset="utf-8">
+    <title>Sign Up For Free</title>
+    </head>
+    <body>
+        <template>
+            <div>
+              <form v-if="!loggedIn">
+                <input type="text" v-model="name" placeholder="Name">
+                <input type="email" v-model="email" placeholder="Email">
+                <input type="password" v-model="password" placeholder="Password">
+                <input type="password" v-model="confirmPassword" placeholder="Confirm Password">
+                <input type="file" @change="uploadImage">
+                <img v-if="imageUrl" :src="imageUrl">
+                <br><br>
+                <input type="checkbox" id="terms" v-model="acceptedTerms">
+                <label for="terms">I accept the terms and conditions</label>
+                <br><br>
+                <button type="submit" :disabled="!acceptedTerms" style="background-color: orange;">Register</button>
+              </form>
+              <div v-else>
+                <p>Welcome {{ name }}!</p>
+                <p>
+                  <a @click="logout">Logout</a>
+                </p>
+              </div>
+              <p>
+                Already have an account? <a @click="showLogin">Login</a>
+              </p>
+            </div>
+          </template>
+          
+          <script>
+          export default {
+            data() {
+              return {
+                name: '',
+                email: '',
+                password: '',
+                confirmPassword: '',
+                imageUrl: '',
+                acceptedTerms: false,
+                loggedIn: false
+              }
+            },
+            methods: {
+              uploadImage(event) {
+                // handle image upload logic here
+              },
+              showLogin() {
+                this.loggedIn = true;
+              },
+              logout() {
+                this.loggedIn = false;
+              }
+            }
+          }
+          </script>
+          
+          <style>
+            /* Add any additional CSS styles here */
+          </style>
+    </body>
+
+</html>

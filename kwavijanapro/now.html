@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	 <style>
+      /* CSS for user profile card */
+      .user-profile-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 20px;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
+        width: 300px;
+      }
+
+      .user-profile-card img {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 50%;
+        margin-bottom: 20px;
+      }
+
+      .user-profile-card h2 {
+        margin-bottom: 10px;
+      }
+
+      .user-profile-card p {
+        margin-bottom: 20px;
+      }
+
+      .user-profile-card button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        padding: 8px 16px;
+        font-size: 14px;
+        cursor: pointer;
+      }
+
+      .user-profile-card button:hover {
+        background-color: #0069d9;
+      }
+
+      /* CSS for edit profile modal */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.4);
+      }
+
+      .modal-content {
+        background-color: #fff;
+        margin: 10% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+      }
+
+      .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+      }
+
+      .close:hover,
+      .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      /* CSS for post section */
+      .post-section {
+        margin: 20px;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
+        width: 600px;
+      }
+
+      .post-section h2 {
+        margin-bottom: 20px;
+      }
+
+      .post-section form {
+        display: flex;
+        margin-bottom: 20px;
+      }
+
+      .post-section form input[type="text"] {
+        flex-grow: 1;
+        margin-right: 10px;
+        padding: 8px;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      .post-section form button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        padding: 8px 16px;
+        font-size: 14px;
+        cursor: pointer;
+      }
+
+      .post-section form button:hover {
+        background-color: #0069d9;
+      }
+    </style>
+</head>
+<body>
+<body>
+  <div id="app">
+    <div class="profile">
+      <div class="profile-card">
+        <div class="profile-picture">
+          <img :src="userProfile.picture" alt="Profile Picture">
+        </div>
+        <div class="profile-name">
+          {{ userProfile.name }}
+        </div>
+        <div class="profile-follow">
+          <button @click="followUser">{{ followButton }}</button>
+        </div>
+        <div class="profile-message">
+          <button @click="sendMessage">Message</button>
+        </div>
+      </div>
+      <div class="profile-details">
+        <div class="details-card">
+          <div class="card-header">
+            <h2>Occupation</h2>
+          </div>
+          <div class="card-body">
+            <div>{{ userProfile.occupation }}</div>
+          </div>
+        </div>
+        <div class="details-card">
+          <div class="card-header">
+            <h2>Location</h2>
+          </div>
+          <div class="card-body">
+            <div>{{ userProfile.location }}</div>
+          </div>
+        </div>
+        <div class="details-card">
+          <div class="card-header">
+            <h2>Education</h2>
+          </div>
+          <div class="card-body">
+            <div>{{ userProfile.education }}</div>
+          </div>
+        </div>
+        <div class="details-card">
+          <div class="card-header">
+            <h2>Tech Stack</h2>
+          </div>
+          <div class="card-body">
+            <div>{{ userProfile.techStack }}</div>
+          </div>
+        </div>
+        <div class="details-card">
+          <div class="card-header">
+            <h2>About</h2>
+          </div>
+          <div class="card-body">
+            <div>{{ userProfile.about }}</div>
+          </div>
+        </div>
+        <div class="details-card">
+          <div class="card-header">
+            <h2>Posts</h2>
+          </div>
+          <div class="card-body">
+            <div v-if="userPosts.length">
+              <div v-for="(post, index) in userPosts" :key="index">
+                <h3>{{ post.title }}</h3>
+                <p>{{ post.content }}</p>
+              </div>
+            </div>
+            <div v-else>
+              <p>No posts yet.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="notifications">
+      <div class="notification-icon">
+        <i class="fas fa-bell"></i>
+      </div>
+      <div class="notification-list">
+        <ul>
+          <li v-for="(notification, index) in notifications" :key="index">
+            <div class="notification-header">{{ notification.title }}</div>
+            <div class="notification-body">{{ notification.message }}</div>
+          </li>
+        </ul>
+      </div>
+    </div>
+   <form class="edit-profile-form" v-if="editing">
+  <h3>Edit Profile</h3>
+  <div class="form-group">
+    <label for="occupation">Occupation</label>
+    <input type="text" id="occupation" v-model="occupation" />
+  </div>
+  <div class="form-group">
+    <label for="location">Location</label>
+    <input type="text" id="location" v-model="location" />
+  </div>
+  <div class="form-group">
+    <label for="education">Education</label>
+    <textarea id="education" v-model="education"></textarea>
+  </div>
+  <div class="form-group">
+    <label for="tech-stack">Tech Stack</label>
+    <textarea id="tech-stack" v-model="techStack"></textarea>
+  </div>
+  <div class="form-group">
+    <label for="about">About</label>
+    <textarea id="about" v-model="about"></textarea>
+  </div>
+  <button @click.prevent="saveChanges">Save Changes</button>
+  <button @click.prevent="cancelEdit">Cancel</button>
+</form>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+
+
+</body>
+</html>

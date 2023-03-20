@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+</head>
+<body>
+<template>
+  <div class="container">
+    <div class="card">
+      <div class="card-header">
+        <h2>Profile</h2>
+        <div class="actions">
+          <button @click="editProfile">Edit</button>
+          <span v-if="isOnline" class="online">Online</span>
+          <span v-else class="offline">Offline</span>
+          <button @click="sendMessage">Message</button>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="profile-picture">
+          <img :src="profilePicture" alt="Profile picture">
+          <h3>{{ userName }}</h3>
+        </div>
+        <div class="user-details">
+          <div class="detail">
+            <h4>Occupation</h4>
+            <p>{{ occupation }}</p>
+          </div>
+          <div class="detail">
+            <h4>Location</h4>
+            <p>{{ location }}</p>
+          </div>
+          <div class="detail">
+            <h4>Education</h4>
+            <p>{{ education }}</p>
+          </div>
+          <div class="detail">
+            <h4>Tech Stack</h4>
+            <p>{{ techStack }}</p>
+          </div>
+          <div class="detail">
+            <h4>About</h4>
+            <p>{{ about }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <h2>Posts</h2>
+        <button>New Post</button>
+      </div>
+      <div class="card-body">
+        <!-- Post content goes here -->
+      </div>
+    </div>
+  </div>
+</template>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<script>
+export default {
+  data() {
+    return {
+      userName: "John Doe",
+      profilePicture: "default_profile_picture.jpg",
+      occupation: "Web Developer",
+      location: "New York, USA",
+      education: "Bachelor's Degree in Computer Science",
+      techStack: "HTML, CSS, JavaScript, Vue.js, Node.js",
+      about:
+        "I'm a full-stack web developer with experience building responsive websites and web applications using modern web technologies.",
+      isOnline: true,
+    };
+  },
+  methods: {
+    editProfile() {
+      // Functionality for editing the profile goes here
+    },
+    sendMessage() {
+      // Functionality for sending a message goes here
+    },
+  },
+};
+</script>
+
+<style>
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 20px;
+}
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 700px;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.card-header h2 {
+  margin: 0;
+}
+
+.card-header button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin-left: 10px
+}
+/* User profile */
+.user-profile {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 20px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+}
+
+/* User details */
+.user-details {
+  width: calc(100% - 250px);
+}
+
+.user-details h1 {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.user-details p {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+/* Education */
+.education-card {
+  display: flex;
+  margin-bottom: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+}
+
+.education-card img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+.education-card h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.education-card p {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+/* Tech Stack */
+.tech-stack-card {
+  display: flex;
+  margin-bottom: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+}
+
+.tech-stack-card img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+.tech-stack-card h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.tech-stack-card p {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+/* About */
+.about-card {
+  margin-bottom: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+}
+
+.about-card h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.about-card p {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+/* Message button */
+.message-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  padding: 10px 20px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.message-button:hover {
+  background-color: #0069d9;
+}
+
+/* Notifications */
+.notification {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.notification-icon {
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 50%;
+  padding: 10px;
+  margin-right: 10px;
+}
+
+.notification-message {
+  font-size: 18px;
+  margin-right: auto;
+}
+
+/* Online status */
+/* Online status */
+.status {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #8c8c8c;
+  margin-top: 10px;
+}
+
+.status:before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+.status-online:before {
+  background-color: #6bbe7d;
+}
+
+.status-offline:before {
+  background-color: #d96b6b;
+}
+
+/* Message button */
+.message-button {
+  background-color: #4f4f4f;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 20px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.2s;
+}
+
+.message-button:hover {
+  background-color: #333;
+}
+
+</body>
+</html>

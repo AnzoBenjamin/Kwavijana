@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/style-profile.css">
+</head>
+<body>
+    <div id="app">
+<div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="profile-img">
+            <img src="img/default-profile.png" alt="user profile picture">
+            <div class="file btn btn-lg btn-primary">
+                change photo
+                <input type="file" name="file" @chanage="onFileChange"/>
+                </div>
+            </div>
+        </div>
+      </div>  
+    </div></div>
+    <div class="profile-action">
+        <button class="btn btn-primary btn-block">Follow</button>
+        <button class="btn btn-outline-primary btn-block">Message</button>
+    </div>
+    <div class="col-md-8">
+        <div class="profile-head">
+          <h5>{{ name }}</h5>
+          <h6>{{ Occupations.join(', ') }}</h6>
+          <p class="profile-rating">LOCATION : <span>{{location}}</span></p>
+        </div>
+         </div>
+         <div class="profile-body">
+            <div class="form-group">
+                <label>Name:</label>
+                <input type="text" v-model="name" class="form-control"/>
+            </div>
+         </div>
+            <div class="form-group">
+                <label>Occupations: </label>
+                <select v-model="Occupations" class="form-control" multiple>
+                 <option value="Developer">Developer</option>
+                 <option value="Engineer">Engineer</option>
+                 <option value="Designer">Designer</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Education: </label>
+                <input type="text" v-model="Education" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label>Tech Stack</label>
+                <select v-model="techstack" class="form -control" multiple>
+                    <option value="Vue.js">Vue.js</option>
+                    <option value="React">React</option>
+                    <option value="Angular">Angular</option>
+                </select>
+            </div>
+          <div class="form-group">
+            <label>About:</label>
+            <textarea v-model="About" class="form-control"></textarea>
+          </div>  
+          <div class="form-group">
+            <label>Hobbies:</label>
+            <select v-model="hobbies" class="form-control" multiple>
+                <option value="Gaming">Gaming</option>
+                <option value="Reading">Reading</option>
+                <option value="Traveling">Traveling</option>
+            </select>
+        </div>
+        <script>
+            new Vue({
+                el: '#app',
+                data: {
+                    name: '',
+                    occupations: [],
+                    location: '',
+                    education:'',
+                    techStack: [],
+                    about:'',
+                    hobbies: [],
+                    profilePicture: 'img/default-profile.png'
+                },
+                methods:{
+                    onFileChange(e){
+                        const file = e.target.files[0];
+                        this.profilePicture = URL.createObjectURL(file);
+                    },
+                    mounted(){
+                        //set defaul values
+                        this.name = "henry chamwa";
+                        this,occupations = ['Developer'];
+                        this.occupations = 'san Francisco, KLA';
+                        this.education = 'B.S Computer Science';
+                        this.techStack = ['Vue.js'];
+                        this.about = 'am a cool guy with bla bla bla and bla hahahahha you get it.';
+                        this.hobbies = ['Gaming', 'Traveling', 'Reading'];
+                    }
+                }
+            });
+        </script>
+</body>
+</html>

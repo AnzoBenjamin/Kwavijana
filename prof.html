@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Profile</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <style>
+    label {
+      display: inline-block;
+      width: 100px;
+    }
+    input {
+      width: 300px;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <h1>{{ name }}</h1>
+    <h2>{{ position }}</h2>
+    <p>{{ experience }} of experience</p>
+    <div>
+      <h3>About Me</h3>
+      <p>{{ about }}</p>
+    </div>
+    <div>
+      <h3>Skills</h3>
+      <ul>
+        <li v-for="(skill, index) in skills">{{ skill }} <button type="button" @click="deleteSkill(index)">x</button></li>
+      </ul>
+      <form>
+        <label>New Skill:</label>
+        <input type="text" v-model="newSkill" @keyup.enter="addSkill">
+        <button type="button" @click="addSkill">Add Skill</button>
+        <br>
+        <br>
+        <label>Email:</label>
+        <input type="email" v-model="email">
+        <br>
+        <label>Website:</label>
+        <input type="text" v-model="website">
+        <br>
+        <label>Phone:</label>
+        <input type="tel" v-model="phone">
+        <br>
+        <button type="button" @click="editProfile">Edit Profile</button>
+        <button type="submit" @click.prevent="updateProfile">Save Changes</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        name: 'John Mark Doe Kyzer',
+        position: 'Coach',
+        experience: '10 Years',
+        email: 'edith@mail.com',
+        website: 'www.example.com',
+        phone: '507-541-4567',
+        about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam viverra, quam et efficitur blandit, mi orci tristique nisl, ut lacinia diam diam eu velit. Donec ac bibendum sapien. Aliquam gravida sapien sit amet nisi volutpat convallis.',
+        skills: ['JavaScript', 'Vue.js', 'HTML', 'CSS'],
+        newSkill: ''
+      },
+      methods: {
+        editProfile: function() {
+          // Set the form fields to their current values
+          this.email = this.email;
+          this.website = this.website;
+          this.phone = this.phone;
+        },
+        updateProfile: function() {
+          axios.put('/api/profile', {
+            name: this.name,
+            position: this.position,
+            experience: this.experience,
+            email: this.email,
+            website: this.website,
+            phone: this.phone,
+            about: this.about,
+            skills: this.skills
+          })
+            .then(function(response)
+            {
+              console.log(response.data);
+            })
+            .catch(function(error) {
+              console.log(error);
+            });
+        },
+        addSkill: function() {
+          if (this.newSkill !== '') {
+            this.skills.push(this.newSkill);
+            this.newSkill = '';
+          }
+        },
+        deleteSkill: function(index) {
+          this.skills.splice(index, 1);
+        }
+      }
+    });
+  </script>
+</body>
+</html>
+
+
+            
